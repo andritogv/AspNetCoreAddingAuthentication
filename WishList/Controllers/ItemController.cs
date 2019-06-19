@@ -47,6 +47,11 @@ namespace WishList.Controllers
         {
             var item = _context.Items.FirstOrDefault(e => e.Id == id);
 
+            if (item is null)
+            {
+                return NotFound();
+            }
+
             if (item.User != _userManager.GetUserAsync(User).Result)
             {
                 return Unauthorized();
